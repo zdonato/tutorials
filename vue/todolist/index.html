@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html lang="en">
+    <body>
+        <div id="app">
+            <input id="newItemInput" v-model="newItemText">
+            <button id="addButton" v-on:click="addItem">Add Item</button>
+            <p>TODO</p>
+
+            <ul>
+                <li v-if="todos.length === 0">No items added yet!</li>
+                <todo-item v-for="(todo, index) in todos"
+                    v-bind:todo="todo"
+                    v-bind:key="index">
+                </todo-item>
+            </ul>
+            
+        </div>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="index.js"></script>
+    <script src="todoComponent.js"></script>
+</html>
