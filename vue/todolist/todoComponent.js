@@ -8,6 +8,6 @@ Vue.component('todo-item', {
     // HTML to use for the component.
     template: `<li> 
                 {{ todo.text }} 
-                <button v-on:click="$parent.removeItem(todo.id)">X</button>
+                <button @click="$parent.removeItem(todo.id)">X</button>
             </li>`
 });

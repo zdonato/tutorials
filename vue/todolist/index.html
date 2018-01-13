@@ -3,7 +3,7 @@
     <body>
         <div id="app">
             <input id="newItemInput" v-model="newItemText">
-            <button id="addButton" v-on:click="addItem">Add Item</button>
+            <button id="addButton" @click="addItem">Add Item</button>
             <p>TODO</p>
 
             <ul>
