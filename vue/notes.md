@@ -24,7 +24,9 @@ Vue exposes instance properties/methods to the object returned when created a ne
 ### Lifecyle hooks
 [API Docs](https://vuejs.org/v2/api/#Options-Lifecycle-Hooks)
 
--DON'T use arrow function for lifecycle hooks because the context will get screwed up
+[Lifecycle Diagram](https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram)
+
+- DON'T use arrow function for lifecycle hooks because the context will get screwed up
 - all lifecycle hooks are called with their `this` context pointing to the Vue instance invoking it
 
 ### Template syntax
@@ -44,3 +46,21 @@ Vue exposes instance properties/methods to the object returned when created a ne
 `v-bind:href` === `:href`
 ##### `v-on`
 `v-on:click` = '@click`
+
+
+### Computed Properties and Watchers
+#### Computed
+- use `computed` in the Vue instance options
+- properties are functions who return a value to be used in the template
+- by default is used as a getter, but you can add `get` and `set` properties so that a setter function is called when the value changes
+#### Watch
+- use `watch` in the Vue instance options
+- essentially same as AngularJS $watch, but it's often better to use `computed` over `watch`
+
+### Class and Style Bindings
+- use `v-bind:class="{ className: boolean }"`
+- can use a bound object instead of inline object notation and place the bound object in the `data` property of the vue instance
+- can also be bound to a computed property
+- can also supply an array of strings to add as classes
+
+

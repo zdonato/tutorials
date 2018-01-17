@@ -7,7 +7,15 @@ let app = new Vue({
     // Data to be passed into the scope
     data: {
         todos: [],
-        newItemText: ""
+        newItemText: "",
+        classes: {}
+    },
+    // Lifecycle hook for created
+    created: function () {
+        this.classes = {
+            active: true,
+            open: false
+        };
     },
     // Methods to be passed into the scope. Call with this.methodName
     // Reference scope variables via this
@@ -29,6 +37,15 @@ let app = new Vue({
                     return true;
                 }
             })
+        },
+        changeClass: function() {
+            this.classes.open = !this.classes.open;
+        }
+    },
+    // Use computed for when a value depends on some other value and needs to be updated when it changes
+    computed: {
+        numItems: function () {
+            return this.todos.length;
         }
     }
 });
