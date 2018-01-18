@@ -63,4 +63,36 @@ Vue exposes instance properties/methods to the object returned when created a ne
 - can also be bound to a computed property
 - can also supply an array of strings to add as classes
 
+### Conditional Rendering
+- use `v-if` on an element
+- can use `v-if` on a `<template></template>` element to conditionally render a template
+- `v-else` and `v-else-if` are available for use, but must follow a `v-if` or they will be ignored
+- Vue will reuse elements in conditional rendering for efficiency, if you don't want them to be reused add a `key` attribute to the element
+- `v-show` will always render the element and toggle its CSS display property (does not support the `<template>` element though)
+- `v-if` has higher toggle costs than `v-show`, because it will destroy and recreate event listeners and child components
+
+### List Rendering
+- `v-for` to render a list of items based on an array
+    - `v-for="item in items"`
+    - `v-for="(item, index) in items"` if you need the index of the element
+- has full access to parent scope (the scope of the component)
+- can also use `v-for` to iterate of the properties of an object
+    - can do `(value, key, index)` to get the key, value, and index of the property
+- add `:key` attribute when using `v-for` to uniquely identify each node for Vue to keep track of easier
+
+### Array Change Detection
+- Vue wraps common array methods so that they trigger view updates
+    - [Full List](https://vuejs.org/v2/guide/list.html#Mutation-Methods)
+- use `Vue.set` on an array to update an item at a certain index if you want to trigger a state update
+    - `Vue.set(example.items, indexOfItem, newValue)`
+
+### Object Change Detection Caveats
+- can't detect changes on objects added after creating Vue instance
+    - have to use `Vue.set(object, key, value)`
+
+
+
+
+
+
 
