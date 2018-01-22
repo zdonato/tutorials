@@ -3,7 +3,7 @@
 <!-- The HTML for the component -->
 <template>
     <div id="app">
-        <input id="newItemInput" v-model="newItemText">
+        <input id="newItemInput" v-model="newItemText" v-on:keyup.enter="addItem">
         <button id="addButton" @click="addItem">Add Item</button>
         <p>TODO <span v-if="todos.length > 0">({{numItems}} items)</span></p>
         <button @click="changeClass">Change Class</button>
@@ -40,14 +40,6 @@ export default {
             active: true,
             open: false
         };
-    },
-    mounted: function () {
-        document.getElementById('newItemInput').addEventListener("keyup", (event) => {
-            event.preventDefault();
-            if (event.keyCode === 13) {
-                document.getElementById('addButton').click();
-            }
-        });
     },
     // Methods to be passed into the scope of the component. Class this.methodName
     // Reference any vars in scope using the this context
