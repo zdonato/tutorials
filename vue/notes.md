@@ -136,5 +136,13 @@ Vue exposes instance properties/methods to the object returned when created a ne
 - `.left`, `.right`, `.middle` for mouse buttons
 
 ### Form Input Bindings
+- use `v-model` to create two-way data bindings
+    - will ignore any initial `value`, `checked`, or `selected` so declare the initial value inside the `data` option of the component
+- will adapt to the input it is bound to
+- always provide a disabled option with an empty value when using a select to get around iOS behavior when `v-model` expression does not match any of the options [link](https://vuejs.org/v2/guide/forms.html#Select)
 
+#### Modifiers
+- `v-model.lazy` to lazily update the data
+- `v-model.number` to typecast as a number
+- `v-model.trim` to automatically trim the input
 
