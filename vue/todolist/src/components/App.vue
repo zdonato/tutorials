@@ -12,10 +12,23 @@
             <todo-item v-for="(todo, index) in todos"
                 :todo="todo"
                 :key="index"
-                :class="classes">
+                :class="classes"
+                @remove="removeItem"
+                @complete="completeItem"> <!-- Listen to the remove event, emitted when removing an item.--> 
             </todo-item>
         </ul>
         
+        <div v-if="completedItems.length > 0">
+            <p>COMPLETED ({{numCompletedItems}} items) </p>
+            <ul>
+                <todo-item v-for="(todo, index) in completedItems"
+                    :todo="todo"
+                    :key="index"
+                    @remove="removeCompletedItem"
+                >
+                </todo-item>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -30,6 +43,7 @@ export default {
     data () {
         return { 
             todos: [],
+            completedItems: [],
             newItemText: "",
             classes: {}
         }
@@ -55,21 +69,40 @@ export default {
             }
         },
         removeItem: function (id) {
-            this.todos.some( (item, idx) => {
-                if (item.id == id) {
-                    this.todos.splice(idx, 1);
-                    return true;
-                }
-            });
+            this.todos.splice(this.findItemIdx(id), 1);
+        },
+        completeItem: function (id) {
+            let idx = this.findItemIdx(id);
+            this.todos[idx].completed = true;
+
+            this.completedItems.push(this.todos.splice(idx, 1)[0]);
+        },
+        removeCompletedItem: function (id) {
+            this.completedItems.splice(this.findItemIdx(id), 1);
         },
         changeClass: function () {
             this.classes.open = !this.classes.open;
+        },
+        findItemIdx: function (id) {
+            let idxRet;
+
+            this.todos.some( (item, idx) => {
+                if (item.id == id) {
+                    idxRet = idx;
+                    return true;
+                }
+            });
+
+            return idxRet;
         }
     },
     // Use computed for when a value depends on some other value and needs to be updated when it changes
     computed: {
         numItems: function() {
             return this.todos.length;
+        },
+        numCompletedItems: function() {
+            return this.completedItems.length;
         }
     },
     components: {
