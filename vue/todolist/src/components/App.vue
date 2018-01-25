@@ -6,7 +6,7 @@
         <input id="newItemInput" v-model="newItemText" v-on:keyup.enter="addItem">
         <button id="addButton" @click="addItem">Add Item</button>
         <p>TODO <span v-if="todos.length > 0">({{numItems}} items)</span></p>
-        <button @click="changeClass">Change Class</button>
+
         <ul>
             <li v-if="todos.length === 0">No items added yet!</li>
             <todo-item v-for="(todo, index) in todos"
@@ -80,9 +80,6 @@ export default {
         removeCompletedItem: function (id) {
             this.completedItems.splice(this.findItemIdx(id), 1);
         },
-        changeClass: function () {
-            this.classes.open = !this.classes.open;
-        },
         findItemIdx: function (id) {
             let idxRet;
 
@@ -113,5 +110,16 @@ export default {
 
 <!-- Put CSS in the style tag -->
 <style lang="scss">
+    html {
+        background-color: gray;
+    }
 
+    li {
+        list-style-type: none;
+        border: 2px solid rgb(0, 255, 76);
+        width: 100px;
+        padding: 5px;
+        text-align: center;
+        margin-top: 5px;
+    }
 </style>
