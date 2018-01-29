@@ -132,7 +132,8 @@ Vue exposes instance properties/methods to the object returned when created a ne
 - `.ctrl`, `.alt`, `.shift`, `.meta` (windows or command key)
     - `<div @click.ctrl="func"></div>` for ctrl + click
 - `.exact` for when you want to respond to just one event only
-    - `@click.ctrl.exact` for only when the ctrl key is pressed
+    - `@click.ctrl.exact` for 
+    only when the ctrl key is pressed
 - `.left`, `.right`, `.middle` for mouse buttons
 
 ### Form Input Bindings
@@ -145,4 +146,47 @@ Vue exposes instance properties/methods to the object returned when created a ne
 - `v-model.lazy` to lazily update the data
 - `v-model.number` to typecast as a number
 - `v-model.trim` to automatically trim the input
+
+### Components
+- `Vue.component(tagName, options);`
+    - use hyphens and all lowercase to comply with html element name standards
+    - this will declare the component globally
+- Local registration
+    - use `components` option when creating the Vue instance
+    - `new Vue({ components: 'my-component' });`
+- `data` must be a function that returns an object with the properties for the component
+
+#### Parent-Child Components
+- Most commonly used components as a child of a parent
+- Keep them as decoupled as possible
+- Follow the strategy "props down, events up"
+    - Parent passes props down to child component
+    - Child emits events to pass data up to the parent
+- Never directly reference or mutate parent data in the child
+    - Take the initial value provided by props and make a copy in the child
+
+#### Prop-Validation
+- can specify requirements for props
+- instead of defining props as an array of strings, make it an object
+```
+{
+    props: {
+        someProp: Number,
+        otherProp: {
+            type: String,
+            required: true,
+            default: 'some default value'
+        }
+    }
+}
+```
+- default can be a function (factory)
+    - use function when the default will be an array or an object
+- can use a custom validation function
+    - `prop: { validator: function (value) { return value > 10 } }`
+
+#### Custom Events
+- `this.$emit('eventName', [args...]);`
+- in the parent component use `@eventName="func"` to run `func` when the event is emitted
+
 
