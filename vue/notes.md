@@ -15,7 +15,7 @@ All vue applications are created via:
 - passes all properties into the scope of the Vue app 
 - when values of the props change, the view will react by updating to match the new values (BUT, this only happens to properties that existed when the instance was created)
 
-#### Useful attributes
+### Useful attributes
 - `v-on:keyup.enter="myFunc"` for calling functions on keyup events
 
 ### Instance properties/methods
@@ -188,5 +188,50 @@ Vue exposes instance properties/methods to the object returned when created a ne
 #### Custom Events
 - `this.$emit('eventName', [args...]);`
 - in the parent component use `@eventName="func"` to run `func` when the event is emitted
+
+#### Non Parent-Child Communication
+- can use an empty Vue instance as a message bus to send info between components
+
+### Content Distribution with Slots
+- [slots proposal](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md)
+- can use slots for building components that are meant to be used together
+    - acts as a placeholder in child component for something that the parent component wishes to render in a specific place
+- [Example](https://vuejs.org/v2/guide/components.html#Named-Slots)
+
+### Dynamic Components
+- use the `<component :is="componentName"></component>` tag to use the same mount point for dynamically switching between components
+- wrap in a `<keep-alive></keep-alive>` tag to keep the component in memory
+    - preserves the state and avoids rerendering
+
+
+### Misc
+#### Authoring Reusable Components
+- API for a Vue component has 3 main parts
+    1. Props
+    2. Events
+    3. Slots
+- Props
+    - allow the external environment to pass data into the component
+- Events
+    - allow the component to trigger side effects in the external environment
+- Slots
+    - allow the external environment to compose the component with extra content
+
+#### Child Component Refs
+- if you have to directly access a child component, add a `ref='id'` attribute to the element
+    - it can then be referenced as `parent.$refs.id` where `parent` is the parent Vue instance
+    - not the best to use though, avoid if possible
+
+#### Cheap Static Components with `v-once`
+- if you have a component who's template is static, add `v-once` attribute and it will only be evaluated once and then cached
+
+
+### Enter/Leave & List Transitions
+- can apply transition effects when items are inserted, updated, or removed from the DOM
+
+#### Transitioning Single Elements/Components
+- use the `<transition></transition>` wrapper component
+
+
 
 

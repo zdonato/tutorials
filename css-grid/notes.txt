@@ -1,0 +1,33 @@
+Grid Container
+- The element on which `display: grid` is applied
+- direct parent of all grid items
+
+Grid Item 
+- Children of the grid container 
+- They are direct descendents of the container 
+
+Grid Line
+- The dividing lines that make up the structure of the grid
+- Can be vertical (column grid lines) or horizontal (row grid lines)
+
+Grid Track
+- The space between 2 adjacent grid lines
+- They are like columns or rows (as a whole) of the grid
+
+Grid Cell
+- The space between 2 adjacent row and two adjacent column grid lines
+- a single unit of the grid
+
+Grid Area
+- The total space surrounded by four grid lines
+- can be comprised of any number of grid cells
+
+
+Properties for the Parent (Grid Container)
+- display: grid | inline-grid | subgrid
+    - grid: generates a block-level grid
+    - inline-grid: generates an inline-level grid
+    - subgrid: used for nested grids and to indicate that you want the sizes of
+                rows/columns to be taken from the parent rather than specifying 
+                its own
+- 
